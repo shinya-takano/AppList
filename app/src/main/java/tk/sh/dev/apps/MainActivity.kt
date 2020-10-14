@@ -1,7 +1,7 @@
 package tk.sh.dev.apps
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import tk.sh.dev.apps.apps.AppListFragment
 import tk.sh.dev.apps.databinding.ActivityMainBinding
 
