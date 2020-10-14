@@ -24,6 +24,7 @@ class AppListAdapter: RecyclerView.Adapter<AppListAdapter.AppListViewHolder>() {
     override fun onBindViewHolder(holder: AppListViewHolder, position: Int) {
 
         val app = appList[position]
+        holder.binding.appIcon.setImageDrawable(app.appIcon)
         holder.binding.appName.text = app.appName
         holder.binding.appVersionName.text = app.versionName
     }
