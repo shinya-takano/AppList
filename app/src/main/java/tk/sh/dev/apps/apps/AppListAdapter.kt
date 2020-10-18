@@ -25,8 +25,7 @@ class AppListAdapter: RecyclerView.Adapter<AppListAdapter.AppListViewHolder>() {
 
         val app = appList[position]
         holder.binding.appIcon.setImageDrawable(app.appIcon)
-        holder.binding.appName.text = app.appName
-        holder.binding.appVersionName.text = app.versionName
+        holder.binding.appDescriptions.text = "${app.appName}\n${app.versionName}"
     }
 
     fun updateList(newList: List<App>) {

@@ -44,15 +44,11 @@ class AppListFragment : Fragment() {
 
         val list = arrayListOf<App>()
         for (onePackage in packages) {
-            Log.d("tag", "$onePackage")
-
             val appName = onePackage.applicationInfo.loadLabel(requireContext().applicationContext.packageManager)
             val appIcon = onePackage.applicationInfo.loadIcon(requireContext().applicationContext.packageManager)
-
-            // TODO name または icon がない package名 みたいなアプリはスキップする
-            // TODO icon が馬鹿でかいアイコンがあるので、imageViewを固定サイズにする
-            // TODO 設定に飛ぶ / 通知に飛ぶ の2つのボタンから始める
-
+            if (appName == onePackage.packageName) {
+                continue
+            }
             val app = App(appIcon, appName.toString(), onePackage.versionName)
             list.add(app)
         }
