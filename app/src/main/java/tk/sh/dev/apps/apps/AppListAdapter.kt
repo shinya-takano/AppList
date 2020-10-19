@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import tk.sh.dev.apps.databinding.ItemAppListBinding
 
-class AppListAdapter: RecyclerView.Adapter<AppListAdapter.AppListViewHolder>() {
+class AppListAdapter(private val listener: AppListAdapterListener): RecyclerView.Adapter<AppListAdapter.AppListViewHolder>() {
 
     private var appList: List<App> = arrayListOf()
 
@@ -26,6 +26,19 @@ class AppListAdapter: RecyclerView.Adapter<AppListAdapter.AppListViewHolder>() {
         val app = appList[position]
         holder.binding.appIcon.setImageDrawable(app.appIcon)
         holder.binding.appDescriptions.text = "${app.appName}\n${app.versionName}"
+
+        holder.binding.button1.setOnClickListener {
+            listener.onClickAppSetting(app)
+        }
+        holder.binding.button2.setOnClickListener {
+            listener.onClickNotificationSetting(app)
+        }
+        holder.binding.button3.setOnClickListener {
+            listener.onClickDeleteStorage(app)
+        }
+        holder.binding.button4.setOnClickListener {
+            listener.onClickUninstall(app)
+        }
     }
 
     fun updateList(newList: List<App>) {
@@ -38,5 +51,12 @@ class AppListAdapter: RecyclerView.Adapter<AppListAdapter.AppListViewHolder>() {
 data class App(
     val appIcon: Drawable? = null,
     val appName: String? = "",
-    val versionName: String? = ""
+    val versionName: String? = "",
+    val packageName: String = ""
 )
+interface AppListAdapterListener {
+    fun onClickAppSetting(app: App)
+    fun onClickNotificationSetting(app: App)
+    fun onClickDeleteStorage(app: App)
+    fun onClickUninstall(app: App)
+}
