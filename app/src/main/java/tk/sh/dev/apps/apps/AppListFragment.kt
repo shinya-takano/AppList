@@ -1,6 +1,9 @@
 package tk.sh.dev.apps.apps
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +15,7 @@ import tk.sh.dev.apps.databinding.FragmentAppListBinding
 import tk.sh.dev.apps.repository.PackageManagerRepository
 
 
-class AppListFragment : Fragment() {
+class AppListFragment : Fragment(), AppListAdapterListener {
 
     private var _binding: FragmentAppListBinding? = null
     private val binding get() = _binding!!
@@ -35,7 +38,7 @@ class AppListFragment : Fragment() {
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
-            adapter = AppListAdapter()
+            adapter = AppListAdapter(this@AppListFragment)
         }
         adapter = binding.recyclerView.adapter as AppListAdapter
 
@@ -49,7 +52,7 @@ class AppListFragment : Fragment() {
             if (appName == onePackage.packageName) {
                 continue
             }
-            val app = App(appIcon, appName.toString(), onePackage.versionName)
+            val app = App(appIcon, appName.toString(), onePackage.versionName, onePackage.packageName)
             list.add(app)
         }
         adapter.updateList(list)
@@ -59,4 +62,28 @@ class AppListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    // region implements AppListAdapterListener
+    override fun onClickAppSetting(app: App) {
+        val intent = Intent()
+        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        intent.data = Uri.parse("package:${app.packageName}")
+        activity?.startActivity(intent)
+    }
+
+    override fun onClickNotificationSetting(app: App) {
+        val intent = Intent()
+        intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+        intent.data = Uri.parse("package:${app.packageName}")
+        activity?.startActivity(intent)
+    }
+
+    override fun onClickDeleteStorage(app: App) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickUninstall(app: App) {
+        TODO("Not yet implemented")
+    }
+    // endregion AppListAdapterListener
 }
