@@ -1,6 +1,5 @@
 package tk.sh.dev.apps.apps
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,7 +24,10 @@ class AppListAdapter(private val listener: AppListAdapterListener): RecyclerView
 
         val app = appList[position]
         holder.binding.appIcon.setImageDrawable(app.appIcon)
-        holder.binding.appDescriptions.text = "${app.appName}\n${app.versionName}"
+        val descriptionBuilder = StringBuilder()
+        descriptionBuilder.append(app.appName).append("\n")
+        descriptionBuilder.append(app.versionName)
+        holder.binding.appDescriptions.text = descriptionBuilder.toString()
 
         holder.binding.button1.setOnClickListener {
             listener.onClickAppSetting(app)

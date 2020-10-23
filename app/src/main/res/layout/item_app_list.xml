@@ -22,7 +22,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/appDescriptions"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/ic_launcher_foreground"
+            android:contentDescription="@string/app_icon_description" />
 
         <TextView
             android:id="@+id/appDescriptions"
@@ -50,7 +51,7 @@
             android:id="@+id/button1"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="アプリ設定"
+            android:text="@string/title_button1"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button2"
@@ -60,7 +61,7 @@
             android:id="@+id/button2"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="通知設定"
+            android:text="@string/title_button2"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/button1"
@@ -70,7 +71,7 @@
             android:id="@+id/button3"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="データ削除"
+            android:text="@string/title_button3"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button4"
@@ -80,7 +81,7 @@
             android:id="@+id/button4"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="アプリ削除"
+            android:text="@string/title_button4"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/button3"
