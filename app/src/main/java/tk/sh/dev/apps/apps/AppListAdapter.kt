@@ -1,5 +1,6 @@
 package tk.sh.dev.apps.apps
 
+import android.content.pm.PackageInfo
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,9 +24,9 @@ class AppListAdapter(private val listener: AppListAdapterListener): RecyclerView
     override fun onBindViewHolder(holder: AppListViewHolder, position: Int) {
 
         val app = appList[position]
-        holder.binding.appIcon.setImageDrawable(app.appIcon)
+        holder.binding.appIcon.setImageDrawable(app.pi!!.applicationInfo.loadIcon(holder.binding.root.context.applicationContext.packageManager))
         val descriptionBuilder = StringBuilder()
-        descriptionBuilder.append(app.appName).append("\n")
+        descriptionBuilder.append(app.pi.applicationInfo.loadLabel(holder.binding.root.context.applicationContext.packageManager)).append("\n")
         descriptionBuilder.append(app.versionName)
         holder.binding.appDescriptions.text = descriptionBuilder.toString()
 
@@ -51,6 +52,7 @@ class AppListAdapter(private val listener: AppListAdapterListener): RecyclerView
     class AppListViewHolder(var binding: ItemAppListBinding): RecyclerView.ViewHolder(binding.root)
 }
 data class App(
+        val pi: PackageInfo? = null,
     val appIcon: Drawable? = null,
     val appName: String? = "",
     val versionName: String? = "",
